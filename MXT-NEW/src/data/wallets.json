@@ -1,0 +1,32 @@
+{
+    "wallets": [
+        {
+            "wallet_address": "mxt_5b5491378f3b1a0f606ef218c5cca076f7105b9a7beb13854dcdbbaf0b5f84ef",
+            "wallet_data": {
+                "wallet_signature": "mxt_00d5963705eb022a6aa307652eb3ec431ae086274b7b666acfc15cf4c0725500",
+                "balance": 989999100.0
+            }
+        },
+        {
+            "wallet_address": "mxt_ab6b54c3236a42537e56f7ac8575334a1878ddedac1c0fbd65ecdd4668d37336",
+            "wallet_data": {
+                "wallet_signature": "mxt_00678b0bdb6059e3faa52a8b719c3f0e719015bb5e8adff0ace0a4873cde2100",
+                "balance": 1000.0
+            }
+        },
+        {
+            "wallet_address": "mxt_bf78032227ff90a1ce88404e9ba8475d38d32bd761b25ad9aa8af16064e1a0a5",
+            "wallet_data": {
+                "wallet_signature": "mxt_00896ebb7c60127e4bc64ddf76c0fc79c90f07aedebac31e2bf1728a65e68e00",
+                "balance": 10000000.0
+            }
+        },
+        {
+            "wallet_address": "mxt_393b7c23a2d65f503fbd97be2170d81af6d1c9501a734ce8316dbf41488848a9",
+            "wallet_data": {
+                "wallet_signature": "mxt_00f08de625483014d5cf63ef96b5e1a350bc47b2f884d8eb9392c2507fd44700",
+                "balance": 0
+            }
+        }
+    ]
+}
