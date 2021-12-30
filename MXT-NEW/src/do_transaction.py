@@ -1,33 +1,33 @@
-#MIT License
+# MIT License
 
-#Copyright (c) 2021 Sm4rtyF0x
+# Copyright (c) 2021 Sm4rtyF0x
 
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 
-#The above copyright notice and this permission notice shall be included in all
-#copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-#SOFTWARE.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
-#Importing additional libraries
+# Importing additional libraries
 import time
 import hashlib
 import string
 import random
 import json
 
-#Creating Transaction class
+# Creating Transaction class
 class Transaction():
     # Defining needed informations in __init__(self) function.
     # This function run once when this class activated.
@@ -37,7 +37,8 @@ class Transaction():
         self.reciever_wallet = reciever_wallet
         self.difficulty = 4
         self.amount = amount
-
+    
+    # Checking any wallet address registered in this system
     def check_wallet_address(self):
         wallets = open("src/data/wallets.json", "r")
         wallets_json = json.load(wallets)
@@ -54,7 +55,8 @@ class Transaction():
                 break
         is_valid = (valid_sender, valid_reciever)
         return is_valid
-
+    
+    # Saving transaction to chain
     def save_transaction(self, block):
         chain = open("src/data/chain.json", "r+")
         chain_json = json.load(chain)
@@ -63,6 +65,7 @@ class Transaction():
         json.dump(chain_json, chain, indent=4)
         chain.truncate()
 
+    # Modifying sender and reciever wallet balance
     def modify_amount(self):
         wallets = open("src/data/wallets.json", "r+")
         wallets_json = json.load(wallets)
@@ -81,6 +84,7 @@ class Transaction():
         json.dump(wallets_json, wallets, indent=4)
         wallets.truncate()
 
+    # Checking capability of sender wallet balance
     def check_amount(self):
         wallets = open("src/data/wallets.json", "r")
         wallets_json = json.load(wallets)
@@ -91,7 +95,8 @@ class Transaction():
                     return True
                 elif i["wallet_data"]["balance"] < self.amount:
                     return False
-
+    
+    # Chceking validity of wallet signature
     def validate_signature(self):
         wallets = open("src/data/wallets.json", "r")
         wallets_json = json.load(wallets)
@@ -103,13 +108,15 @@ class Transaction():
                 elif i["wallet_data"]["wallet_signature"] != self.sender_signature:
                     return False
     
+    # Getting previous hash from chain
     def previous_block(self):
         blocks = open("src/data/chain.json", "r")
         blocks_json = json.load(blocks)
         blocks.close()
         previous_block = blocks_json["blocks"][-1]["block"]
         return previous_block
-
+    
+    # Main function of this class and calls the other functions to run.
     def do_transaction(self):
         valid_sender, valid_reciever = self.check_wallet_address()
         if valid_sender == True and valid_reciever == True:
@@ -157,7 +164,8 @@ class Transaction():
                 print("Your amount isn't enough to send that much MXT.")
         else:
             print("Incorrect sender or reciever wallet")
-
+    
+    # This function generate the genesis block of MXT coin
     def generate_genesis_block(self):
         time_now = time.time()
         paragraph = "Twenty-five stars were neatly placed on the piece of paper. There was room for five more stars but they would be difficult ones to earn. It had taken years to earn the first twenty-five, and they were considered the 'easy' ones."
