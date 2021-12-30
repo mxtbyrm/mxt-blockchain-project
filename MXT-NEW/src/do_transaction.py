@@ -176,6 +176,7 @@ class Transaction():
         json.dump(blocks, chain, indent=4)
         chain.close()
 
+# Running Transaction class and getting wallet address informations for transaction
 if __name__ == "__main__":
     sender_addr = input("Sender wallet address: ")
     sender_sign = input("Sender signature: ")
